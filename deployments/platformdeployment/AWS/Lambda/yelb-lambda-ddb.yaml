@@ -78,7 +78,7 @@ Resources:
               var params = {
                 TableName: event.ResourceProperties.DynamoTableName,
                 Item:{
-                    "name": "bucadibeppo",
+                    "name": "everything",
                     "restaurantcount": 0
                 }
               };
@@ -93,7 +93,7 @@ Resources:
               var params = {
                 TableName: event.ResourceProperties.DynamoTableName,
                 Item:{
-                    "name": "outback",
+                    "name": "strata",
                     "restaurantcount": 0
                 }
               };
@@ -108,7 +108,7 @@ Resources:
               var params = {
                 TableName: event.ResourceProperties.DynamoTableName,
                 Item:{
-                    "name": "ihop",
+                    "name": "prisma",
                     "restaurantcount": 0
                 }
               };
@@ -123,7 +123,7 @@ Resources:
               var params = {
                 TableName: event.ResourceProperties.DynamoTableName,
                 Item:{
-                    "name": "chipotle",
+                    "name": "cortex",
                     "restaurantcount": 0
                 }
               };

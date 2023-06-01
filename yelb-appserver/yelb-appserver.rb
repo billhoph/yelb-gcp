@@ -115,30 +115,30 @@ get '/api/getvotes' do
     @votes = getvotes()
 end #get /api/getvotes 
 
-get '/api/ihop' do
+get '/api/prisma' do
     headers 'Access-Control-Allow-Origin' => '*'
     headers 'Access-Control-Allow-Headers' => 'Authorization,Accepts,Content-Type,X-CSRF-Token,X-Requested-With'
     headers 'Access-Control-Allow-Methods' => 'GET,POST,PUT,DELETE,OPTIONS'
-    @ihop = restaurantsupdate("ihop")
-end #get /api/ihop 
+    @prisma = restaurantsupdate("prisma")
+end #get /api/prisma 
 
-get '/api/chipotle' do
+get '/api/cortex' do
     headers 'Access-Control-Allow-Origin' => '*'
     headers 'Access-Control-Allow-Headers' => 'Authorization,Accepts,Content-Type,X-CSRF-Token,X-Requested-With'
     headers 'Access-Control-Allow-Methods' => 'GET,POST,PUT,DELETE,OPTIONS' 
-    @chipotle = restaurantsupdate("chipotle")
-end #get /api/chipotle 
+    @cortex = restaurantsupdate("cortex")
+end #get /api/cortex 
 
-get '/api/outback' do
+get '/api/strata' do
     headers 'Access-Control-Allow-Origin' => '*'
     headers 'Access-Control-Allow-Headers' => 'Authorization,Accepts,Content-Type,X-CSRF-Token,X-Requested-With'
     headers 'Access-Control-Allow-Methods' => 'GET,POST,PUT,DELETE,OPTIONS'
-    @outback = restaurantsupdate("outback")
-end #get /api/outback 
+    @strata = restaurantsupdate("strata")
+end #get /api/strata 
 
-get '/api/bucadibeppo' do
+get '/api/everything' do
     headers 'Access-Control-Allow-Origin' => '*'
     headers 'Access-Control-Allow-Headers' => 'Authorization,Accepts,Content-Type,X-CSRF-Token,X-Requested-With'
     headers 'Access-Control-Allow-Methods' => 'GET,POST,PUT,DELETE,OPTIONS' 
-    @bucadibeppo = restaurantsupdate("bucadibeppo")
-end #get /api/bucadibeppo 
+    @everything = restaurantsupdate("everything")
+end #get /api/everything 

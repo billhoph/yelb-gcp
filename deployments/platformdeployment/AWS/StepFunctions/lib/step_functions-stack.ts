@@ -51,7 +51,7 @@ export class StepFunctionsStack extends cdk.Stack {
         action: 'putItem',
         parameters: {
             TableName: ddbtablerestaurant.tableName,
-            Item: {"name": {"S": "ihop"}, "restaurantcount": {"N": "0"}}
+            Item: {"name": {"S": "prisma"}, "restaurantcount": {"N": "0"}}
         },
         physicalResourceId: cr.PhysicalResourceId.of(ddbtablerestaurant.tableName + '_initialization')
       },
@@ -64,7 +64,7 @@ export class StepFunctionsStack extends cdk.Stack {
         action: 'putItem',
         parameters: {
             TableName: ddbtablerestaurant.tableName,
-            Item: {"name": {"S": "chipotle"}, "restaurantcount": {"N": "0"}}
+            Item: {"name": {"S": "cortex"}, "restaurantcount": {"N": "0"}}
         },
         physicalResourceId: cr.PhysicalResourceId.of(ddbtablerestaurant.tableName + '_initialization')
       },
@@ -77,7 +77,7 @@ export class StepFunctionsStack extends cdk.Stack {
         action: 'putItem',
         parameters: {
             TableName: ddbtablerestaurant.tableName,
-            Item: {"name": {"S": "outback"}, "restaurantcount": {"N": "0"}}
+            Item: {"name": {"S": "strata"}, "restaurantcount": {"N": "0"}}
         },
         physicalResourceId: cr.PhysicalResourceId.of(ddbtablerestaurant.tableName + '_initialization')
       },
@@ -90,7 +90,7 @@ export class StepFunctionsStack extends cdk.Stack {
         action: 'putItem',
         parameters: {
             TableName: ddbtablerestaurant.tableName,
-            Item: {"name": {"S": "bucadibeppo"}, "restaurantcount": {"N": "0"}}
+            Item: {"name": {"S": "everything"}, "restaurantcount": {"N": "0"}}
         },
         physicalResourceId: cr.PhysicalResourceId.of(ddbtablerestaurant.tableName + '_initialization')
       },
@@ -436,7 +436,7 @@ export class StepFunctionsStack extends cdk.Stack {
           requestTemplates: {
             "application/json": 
             `{
-            "input": "[{\\"restaurant_name\\": \\"ihop\\"}, {\\"restaurant_name\\": \\"bucadibeppo\\"}, {\\"restaurant_name\\": \\"chipotle\\"}, {\\"restaurant_name\\": \\"outback\\"}]",
+            "input": "[{\\"restaurant_name\\": \\"prisma\\"}, {\\"restaurant_name\\": \\"everything\\"}, {\\"restaurant_name\\": \\"cortex\\"}, {\\"restaurant_name\\": \\"strata\\"}]",
             "stateMachineArn": "${sm_getvotes.stateMachineArn}"
             }`
           },
@@ -507,13 +507,13 @@ export class StepFunctionsStack extends cdk.Stack {
     )    
     
     ///////////////////////////////////////////
-    // createvoteoutback resource and method
+    // createvotestrata resource and method
     ///////////////////////////////////////////  
 
     
-    const createvoteoutback = YelbAPIGatewayStepFunctions.root.addResource("outback") 
+    const createvotestrata = YelbAPIGatewayStepFunctions.root.addResource("strata") 
     
-    createvoteoutback.addMethod(
+    createvotestrata.addMethod(
       "GET",
       new apigateway.Integration({
         type: apigateway.IntegrationType.AWS,
@@ -525,7 +525,7 @@ export class StepFunctionsStack extends cdk.Stack {
           requestTemplates: {
             "application/json": 
             `{
-            "input": "{\\"restaurant_name\\": \\"outback\\"}",
+            "input": "{\\"restaurant_name\\": \\"strata\\"}",
             "stateMachineArn": "${sm_restaurant.stateMachineArn}"
             }`
           },
@@ -552,12 +552,12 @@ export class StepFunctionsStack extends cdk.Stack {
     )    
     
     ///////////////////////////////////////////
-    // createvoteihop resource and method
+    // createvoteprisma resource and method
     ///////////////////////////////////////////  
     
-    const createvoteoihop = YelbAPIGatewayStepFunctions.root.addResource("ihop") 
+    const createvoteoprisma = YelbAPIGatewayStepFunctions.root.addResource("prisma") 
     
-    createvoteoihop.addMethod(
+    createvoteoprisma.addMethod(
       "GET",
       new apigateway.Integration({
         type: apigateway.IntegrationType.AWS,
@@ -569,7 +569,7 @@ export class StepFunctionsStack extends cdk.Stack {
           requestTemplates: {
             "application/json": 
             `{
-            "input": "{\\"restaurant_name\\": \\"ihop\\"}",
+            "input": "{\\"restaurant_name\\": \\"prisma\\"}",
             "stateMachineArn": "${sm_restaurant.stateMachineArn}"
             }`
           },
@@ -596,12 +596,12 @@ export class StepFunctionsStack extends cdk.Stack {
     )    
 
     ///////////////////////////////////////////
-    // createvotechipotle resource and method
+    // createvotecortex resource and method
     ///////////////////////////////////////////  
 
-    const createvotechipotle = YelbAPIGatewayStepFunctions.root.addResource("chipotle") 
+    const createvotecortex = YelbAPIGatewayStepFunctions.root.addResource("cortex") 
     
-    createvotechipotle.addMethod(
+    createvotecortex.addMethod(
       "GET",
       new apigateway.Integration({
         type: apigateway.IntegrationType.AWS,
@@ -613,7 +613,7 @@ export class StepFunctionsStack extends cdk.Stack {
           requestTemplates: {
             "application/json": 
             `{
-            "input": "{\\"restaurant_name\\": \\"chipotle\\"}",
+            "input": "{\\"restaurant_name\\": \\"cortex\\"}",
             "stateMachineArn": "${sm_restaurant.stateMachineArn}"
             }`
           },
@@ -641,12 +641,12 @@ export class StepFunctionsStack extends cdk.Stack {
     
     
     ///////////////////////////////////////////
-    // createvotebucadibeppo resource and method
+    // createvoteeverything resource and method
     ///////////////////////////////////////////  
   
-    const createvotebucadibeppo = YelbAPIGatewayStepFunctions.root.addResource("bucadibeppo") 
+    const createvoteeverything = YelbAPIGatewayStepFunctions.root.addResource("everything") 
     
-    createvotebucadibeppo.addMethod(
+    createvoteeverything.addMethod(
       "GET",
       new apigateway.Integration({
         type: apigateway.IntegrationType.AWS,
@@ -658,7 +658,7 @@ export class StepFunctionsStack extends cdk.Stack {
           requestTemplates: {
             "application/json": 
             `{
-            "input": "{\\"restaurant_name\\": \\"bucadibeppo\\"}",
+            "input": "{\\"restaurant_name\\": \\"everything\\"}",
             "stateMachineArn": "${sm_restaurant.stateMachineArn}"
             }`
           },
