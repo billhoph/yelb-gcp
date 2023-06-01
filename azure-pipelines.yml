@@ -32,7 +32,7 @@ stages:
     - task: prisma-cloud-compute-scan@3
       inputs:
         scanType: 'images'
-        twistlockService: 'prisma-cloud-demo'
+        twistlockService: 'prisma-jp-demo'
         artifact: 'harbor.alson.space/cyberweek/yelb-appserver:v2.0'
         project: 'Cyberweek Project'
 
@@ -47,7 +47,7 @@ stages:
     - task: prisma-cloud-compute-scan@3
       inputs:
         scanType: 'images'
-        twistlockService: 'prisma-cloud-demo'
+        twistlockService: 'prisma-jp-demo'
         artifact: 'harbor.alson.space/cyberweek/yelb-ui:v2.0'
         project: 'Cyberweek Project'
 
@@ -61,6 +61,6 @@ stages:
     - task: prisma-cloud-compute-scan@3
       inputs:
         scanType: 'images'
-        twistlockService: 'prisma-cloud-demo'
+        twistlockService: 'prisma-jp-demo'
         artifact: 'harbor.alson.space/cyberweek/yelb-db:v2.0'
         project: 'Cyberweek Project'
