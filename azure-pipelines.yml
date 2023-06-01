@@ -35,7 +35,6 @@ stages:
         scanType: 'images'
         twistlockService: 'prisma-jp-demo'
         artifact: 'harbor.alson.space/cyberweek/yelb-appserver:v2.0'
-        project: 'Cyberweek Project'
 
     - task: Docker@2
       displayName: Build Web Tier image
@@ -51,7 +50,6 @@ stages:
         scanType: 'images'
         twistlockService: 'prisma-jp-demo'
         artifact: 'harbor.alson.space/cyberweek/yelb-ui:v2.0'
-        project: 'Cyberweek Project'
 
     - task: Docker@2
       displayName: Build DB Tier Image
@@ -66,4 +64,3 @@ stages:
         scanType: 'images'
         twistlockService: 'prisma-jp-demo'
         artifact: 'harbor.alson.space/cyberweek/yelb-db:v2.0'
-        project: 'Cyberweek Project'
