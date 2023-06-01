@@ -123,7 +123,7 @@ spec:
     spec:
       containers:
       - name: yelb-db
-        image:  mreferre/yelb-db:0.6
+        image:  harbor.alson.space/cyberweek/yelb-db:v2.0
         ports:
         - containerPort: 5432
 ---
@@ -145,7 +145,7 @@ spec:
     spec:
       containers:
       - name: yelb-appserver
-        image:  mreferre/yelb-appserver:0.7
+        image:  harbor.alson.space/cyberweek/yelb-appserver:v2.0
         ports:
         - containerPort: 4567
 
