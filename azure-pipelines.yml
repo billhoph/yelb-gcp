@@ -21,7 +21,7 @@ stages:
       vmImage: ubuntu-latest
     steps:
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build App Tier Image
       inputs:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/yelb-appserver/Dockerfile'
@@ -30,6 +30,7 @@ stages:
           $(tag)
 
     - task: prisma-cloud-compute-scan@3
+      displayName: Scan App Tier Image
       inputs:
         scanType: 'images'
         twistlockService: 'prisma-jp-demo'
@@ -37,7 +38,7 @@ stages:
         project: 'Cyberweek Project'
 
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build Web Tier image
       inputs:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/yelb-ui/Dockerfile'
@@ -45,6 +46,7 @@ stages:
           $(tag)
 
     - task: prisma-cloud-compute-scan@3
+      displayName: Scan UI Tier Image
       inputs:
         scanType: 'images'
         twistlockService: 'prisma-jp-demo'
@@ -52,13 +54,14 @@ stages:
         project: 'Cyberweek Project'
 
     - task: Docker@2
-      displayName: Build an image
+      displayName: Build DB Tier Image
       inputs:
         command: build
         dockerfile: '$(Build.SourcesDirectory)/yelb-db/Dockerfile'
         tags: |
           $(tag)
     - task: prisma-cloud-compute-scan@3
+      displayName: Scan DB Tier Image
       inputs:
         scanType: 'images'
         twistlockService: 'prisma-jp-demo'
