@@ -33,7 +33,7 @@ stages:
       inputs:
         scanType: 'images'
         twistlockService: 'prisma-cloud-demo'
-        artifact: 'yelb-appserver:$(tag)'
+        artifact: 'harbor.alson.space/cyberweek/yelb-appserver:v2.0'
         project: 'Cyberweek Project'
 
     - task: Docker@2
@@ -48,7 +48,7 @@ stages:
       inputs:
         scanType: 'images'
         twistlockService: 'prisma-cloud-demo'
-        artifact: 'yelb-ui:$(tag)'
+        artifact: 'harbor.alson.space/cyberweek/yelb-ui:v2.0'
         project: 'Cyberweek Project'
 
     - task: Docker@2
@@ -62,5 +62,5 @@ stages:
       inputs:
         scanType: 'images'
         twistlockService: 'prisma-cloud-demo'
-        artifact: 'yelb-db:$(tag)'
+        artifact: 'harbor.alson.space/cyberweek/yelb-db:v2.0'
         project: 'Cyberweek Project'
