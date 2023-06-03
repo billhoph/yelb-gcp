@@ -1,16 +1,7 @@
 
-#### Why Yelb 
+#### What is this App
 
-When experimenting with new technologies you often follow tutorials that let you deploy purpose-built simple demo application. With Yelb I wanted to make this experience the other way around: start with an existing application and adapt it to the various technologies, services and platforms you are learning. I found this to be way more fun and useful. 
-
-This was particularly true as I embarked with the challenge of learning different abstractions available in the cloud:
-
-![cloud-abstractions](images/cloud-abstractions.png)
-
-See [this blog post](http://www.it20.info/2018/06/compute-abstractions-on-aws/) for more information.
-
-Yelb can be deployed (potentially) on each of these abstractions from bare metal (EC2) all the way to Lambda (serverless). 
-
+This is a Demo App base on Yelb for k8s testing and security evaluation.
 
 #### Yelb architecture
 
@@ -36,12 +27,6 @@ This is how the UI looks like at this point:
 ![yelb-ui](images/yelb-ui.png)
 
 The nature of the app allows people to experiment with the statless `yelb-ui` and `yelb-appserver` components (think scaling out, blue/green depoyments, etc.) as well as experiment with the stateful `redis-server` and `yelb-db` backend components. 
-
-#### How can I use it?
-
-If you intend to use Yelb as a generic application with the ultimate goal of learning and playing with multiple platforms (from cloud instances, to containers through potentially serverless), then you should probably go straight into the `deployments` folder and specifically in the `platformdeployment` folder. This is where all the various configuration files for the various platforms are available. This folder will ideally be a continuous work in progress. 
-
-If you intend to contribute, fork or understand anyway how the single components work I suggest you dig into each of them looking at the code (and the various dockerfiles) to learn how they work and how they are packaged. In addition to that you should look into the `deployments` folder how to start the application in development mode and test mode.  
 
 #### Known issues and limitations
 
