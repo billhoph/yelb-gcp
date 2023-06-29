@@ -79,7 +79,7 @@ spec:
     spec:
       containers:
       - name: yelb-ui
-        image:  harbor.alson.space/cyberweek/yelb-ui:v2.0
+        image:  harbor.alson.space/cyberweek/yelb-ui:v2.1
         ports:
         - containerPort: 80
 ---
