@@ -98,7 +98,8 @@ docker push harbor.alson.space/jenkins/yelb-appserver:1.0
 
     stage('Deploy Application') {
       steps {
-        sh 'microk8s kubectl get ns'
+        sh '''kubectl cluster-info --context kind-kind
+kubectl get pod -A'''
       }
     }
 
