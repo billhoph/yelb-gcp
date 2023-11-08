@@ -2,10 +2,22 @@ pipeline {
   agent any
   stages {
     stage('Git Checkout') {
-      steps {
-        sh '''rm -Rf ./yelb-jenkins
+      parallel {
+        stage('Git Checkout') {
+          steps {
+            sh '''rm -Rf ./yelb-jenkins
+
 git clone https://github.com/billhoph/yelb-jenkins.git
 ls ./yelb-jenkins'''
+          }
+        }
+
+        stage('Clean up Images on Node') {
+          steps {
+            sh 'docker system prune -a'
+          }
+        }
+
       }
     }
 
@@ -38,9 +50,15 @@ ls ./yelb-jenkins'''
       }
     }
 
-    stage('Docker Image Scanning') {
+    stage('List Successful Build Images') {
       steps {
         sh 'docker images'
+      }
+    }
+
+    stage('Scanning Images (UI Image)') {
+      steps {
+        prismaCloudScanImage(image: 'harbor.alson.space/jenkins/yelb-ui:1.0', resultsFile: 'yelb-ui-scan.log', logLevel: 'critical')
       }
     }
 
