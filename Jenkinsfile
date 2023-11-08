@@ -86,6 +86,16 @@ ls ./yelb-jenkins'''
       }
     }
 
+    stage('Push Images to Harbor') {
+      steps {
+        sh '''docker login -u admin -p Habor12345
+docker push harbor.alson.space/jenkins/yelb-ui:1.0
+docker push harbor.alson.space/jenkins/yelb-db:1.0
+docker push harbor.alson.space/jenkins/yelb-appserver:1.0
+'''
+      }
+    }
+
   }
   environment {
     pcskey = 'd505ece3-5ac5-4247-b1ff-b95ec4a28816::Sz52YQjmJDo0ESkK7x0n+E/EBZg='
