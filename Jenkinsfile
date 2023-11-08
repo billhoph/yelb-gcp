@@ -23,7 +23,7 @@ ls ./yelb-jenkins'''
 
     stage('Code Scanning') {
       steps {
-        sh 'checkov -d ./yelb-jenkins --use-enforcement-rules --prisma-api-url https://api.sg.prismacloud.io --bc-api-key $pcskey --repo-id jenkins-demo/code-checking --branch main -o cli -o junitxml --quiet --compact'
+        sh 'checkov -d ./yelb-jenkins --use-enforcement-rules --prisma-api-url https://api.sg.prismacloud.io --bc-api-key $pcskey --repo-id jenkins-demo/code-checking --branch main -o cli --quiet --compact'
       }
     }
 
