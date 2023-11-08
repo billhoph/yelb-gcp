@@ -57,6 +57,7 @@ spec:
   - port: 80
     protocol: TCP
     targetPort: 80
+    nodePort: 80
     # nodePort: 32777 <- if not specified, the system will generate a nodePort value
   selector:
     app: yelb-ui
@@ -80,7 +81,7 @@ spec:
     spec:
       containers:
       - name: yelb-ui
-        image: mreferre/yelb-ui:0.10
+        image: harbor.alson.space/jenkins/yelb-ui:1.0
         ports:
         - containerPort: 80
 ---
@@ -124,7 +125,7 @@ spec:
     spec:
       containers:
       - name: yelb-db
-        image: mreferre/yelb-db:0.6
+        image: harbor.alson.space/jenkins/yelb-db:1.0
         ports:
         - containerPort: 5432
 ---
@@ -146,7 +147,7 @@ spec:
     spec:
       containers:
       - name: yelb-appserver
-        image: mreferre/yelb-appserver:0.7
+        image: harbor.alson.space/jenkins/yelb-appserver:1.0
         ports:
         - containerPort: 4567
 
