@@ -99,7 +99,9 @@ docker push harbor.alson.space/jenkins/yelb-appserver:1.0
     stage('Deploy Application') {
       steps {
         sh '''kubectl cluster-info --context kind-kind
-kubectl get pod -A'''
+kubectl get pod -A
+pwd
+ls -tlr'''
       }
     }
 
