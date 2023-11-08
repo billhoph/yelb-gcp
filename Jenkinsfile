@@ -100,7 +100,7 @@ docker push harbor.alson.space/jenkins/yelb-appserver:1.0
       steps {
         sh '''kubectl cluster-info --context kind-kind
 kubectl get pod -A
-kubectl apply -f ./yelb-jenkins/deployments/platformdeployment/Kubernetes/yaml/yelb-k8s-minikube-ingress.yaml -n demo-app'''
+kubectl apply -f ./yelb-jenkins/deployments/platformdeployment/Kubernetes/yaml/yelb-k8s-minikube-nodeport.yaml -n demo-app'''
       }
     }
 
