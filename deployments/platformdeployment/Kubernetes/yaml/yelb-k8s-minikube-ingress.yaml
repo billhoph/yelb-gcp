@@ -65,7 +65,7 @@ metadata:
   name: yelb-ui-ingress
 spec:
   rules:
-    - host: yelb.mydomain.com
+    - host: demo-app.alson.space
       http:
         paths:
           - path: /
@@ -94,7 +94,7 @@ spec:
     spec:
       containers:
       - name: yelb-ui
-        image: mreferre/yelb-ui:0.10
+        image: docker pull harbor.alson.space/jenkins/yelb-ui:1.0
         ports:
         - containerPort: 80
 ---
@@ -138,7 +138,7 @@ spec:
     spec:
       containers:
       - name: yelb-db
-        image: mreferre/yelb-db:0.6
+        image: harbor.alson.space/jenkins/yelb-db:1.0
         ports:
         - containerPort: 5432
 ---
@@ -160,6 +160,6 @@ spec:
     spec:
       containers:
       - name: yelb-appserver
-        image: mreferre/yelb-appserver:0.7
+        image: harbor.alson.space/jenkins/yelb-appserver:1.0
         ports:
         - containerPort: 4567
