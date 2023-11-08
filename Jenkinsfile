@@ -3,8 +3,12 @@ pipeline {
   stages {
     stage('Source Code Scanning') {
       steps {
-        sh '''cd yelb-jenkins
-checkov -d . --use-enforcement-rules --prisma-api-url https://api.sg.prismacloud.io --bc-api-key $pcskey --repo-id jenkins-demo/code-checking --branch main -o cli -o junitxml --output-file-path console,CheckovReport.xml --quiet --compact'''
+        sh '''pwd
+checkov -d ./yelb-jenkins --use-enforcement-rules --prisma-api-url https://api.sg.prismacloud.io --bc-api-key $pcskey --repo-id jenkins-demo/code-checking --branch main -o cli -o junitxml --output-file-path console,CheckovReport.xml --quiet --compact
+rm -Rf ./yelb-jenkins
+
+
+'''
       }
     }
 
