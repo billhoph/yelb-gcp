@@ -88,7 +88,7 @@ ls ./yelb-jenkins'''
 
     stage('Push Images to Harbor') {
       steps {
-        sh '''docker login harbor.alson.space -u admin -p Habor12345
+        sh '''docker login harbor.alson.space -u admin -p Harbor12345
 docker push harbor.alson.space/jenkins/yelb-ui:1.0
 docker push harbor.alson.space/jenkins/yelb-db:1.0
 docker push harbor.alson.space/jenkins/yelb-appserver:1.0
