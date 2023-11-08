@@ -98,7 +98,7 @@ docker push harbor.alson.space/jenkins/yelb-appserver:1.0
 
     stage('Deploy Application') {
       steps {
-        sh '''kubectl cluster-info --context kind-kind
+        sh '''kubectl cluster-info --context kind-demo
 kubectl get pod -A
 kubectl apply -f ./yelb-jenkins/deployments/platformdeployment/Kubernetes/yaml/yelb-k8s-minikube-nodeport.yaml -n demo-app
 kubectl get svc/yelb-ui -n demo-app'''
