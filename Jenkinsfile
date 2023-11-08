@@ -96,6 +96,12 @@ docker push harbor.alson.space/jenkins/yelb-appserver:1.0
       }
     }
 
+    stage('Deploy Application') {
+      steps {
+        sh 'microk8s kubectl get ns'
+      }
+    }
+
   }
   environment {
     pcskey = 'd505ece3-5ac5-4247-b1ff-b95ec4a28816::Sz52YQjmJDo0ESkK7x0n+E/EBZg='
