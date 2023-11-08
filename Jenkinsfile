@@ -60,16 +60,29 @@ ls ./yelb-jenkins'''
       parallel {
         stage('Scanning Images (UI Image)') {
           steps {
-            prismaCloudScanImage(image: 'harbor.alson.space/jenkins/yelb-ui:1.0', resultsFile: 'yelb-ui-scan.json', logLevel: 'info', dockerAddress: 'unix:///var/run/docker.sock')
+            prismaCloudScanImage(image: 'harbor.alson.space/jenkins/yelb-ui:1.0', resultsFile: './yelb-ui-scan.json', logLevel: 'info', dockerAddress: 'unix:///var/run/docker.sock')
           }
         }
 
-        stage('Pushing Scanning Result of UI') {
+        stage('Scanning Images (App Image)') {
           steps {
-            prismaCloudPublish(resultsFilePattern: 'yelb-ui-scan.json')
+            prismaCloudScanImage(image: 'harbor.alson.space/jenkins/yelb-appserver:1.0', resultsFile: './yelb-app-scan.json', logLevel: 'info', dockerAddress: 'unix:///var/run/docker.sock')
           }
         }
 
+        stage('Scanning Images (DB Image)') {
+          steps {
+            prismaCloudScanImage(dockerAddress: 'unix:///var/run/docker.sock', image: 'harbor.alson.space/jenkins/yelb-db:1.0', resultsFile: './yelb-db-scan.json', logLevel: 'info')
+          }
+        }
+
+      }
+    }
+
+    stage('Publish Scan Result') {
+      steps {
+        sh 'ls -tlr'
+        prismaCloudPublish(resultsFilePattern: '*.json')
       }
     }
 
