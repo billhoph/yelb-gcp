@@ -82,6 +82,7 @@ spec:
       containers:
       - name: yelb-ui
         image: harbor.alson.space/jenkins/yelb-ui:1.0
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
 ---
@@ -126,6 +127,7 @@ spec:
       containers:
       - name: yelb-db
         image: harbor.alson.space/jenkins/yelb-db:1.0
+        imagePullPolicy: Always
         ports:
         - containerPort: 5432
 ---
@@ -148,6 +150,7 @@ spec:
       containers:
       - name: yelb-appserver
         image: harbor.alson.space/jenkins/yelb-appserver:1.0
+        imagePullPolicy: Always
         ports:
         - containerPort: 4567
 
