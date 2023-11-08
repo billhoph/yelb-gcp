@@ -14,7 +14,7 @@ ls ./yelb-jenkins'''
 
         stage('Clean up Images on Node') {
           steps {
-            sh 'docker system prune -a'
+            sh 'docker system prune -a -f'
           }
         }
 
