@@ -101,7 +101,8 @@ docker push harbor.alson.space/jenkins/yelb-appserver:1.0
         sh '''kubectl cluster-info --context kind-kind
 kubectl get pod -A
 pwd
-ls -tlr'''
+ls -tlr
+cat ./yelb-jenkins/deployments/platformdeployment/Kubernetes/yaml/yelb-k8s-minikube-ingress.yaml'''
       }
     }
 
