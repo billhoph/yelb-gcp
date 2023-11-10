@@ -102,6 +102,7 @@ docker push harbor.alson.space/jenkins/yelb-appserver:1.0
 kubectl get pod -A
 kubectl delete ns demo-app
 kubectl create ns demo-app
+kubectl delete -f ./yelb-jenkins/deployments/platformdeployment/Kubernetes/yaml/yelb-k8s-minikube-nodeport.yaml -n demo-app
 kubectl apply -f ./yelb-jenkins/deployments/platformdeployment/Kubernetes/yaml/yelb-k8s-minikube-nodeport.yaml -n demo-app
 kubectl get svc/yelb-ui -n demo-app'''
       }
