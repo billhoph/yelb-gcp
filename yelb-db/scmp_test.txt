@@ -1,0 +1,14 @@
+DATABASES = {
+    'sqlite': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'stock',
+        'USER': 'paadmin',
+        'PASSWORD': 'Abcd1234567890'
+        'HOST': 'b19823021992.mysql.rds.aliyuncs.com',
+        'PORT': '8443',
+    },
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}
