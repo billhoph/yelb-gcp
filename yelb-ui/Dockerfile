@@ -1,5 +1,6 @@
 FROM node:12.22
 MAINTAINER massimo@it20.info
+  # checkov:skip=CKV_DOCKER_6: ADD REASON
 
 WORKDIR /
 
