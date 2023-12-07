@@ -109,6 +109,6 @@ kubectl get svc/yelb-ui -n demo-app'''
 
   }
   environment {
-    pcskey = 'bc5c2b80-45dc-4acd-985c-a80be6ad4205::YpjCwiFYaSr6Aj6kEiPd5IcRwAw='
+    pcskey = '1c788e25-83ba-4b31-94d6-3f99234e2e46::DdgP+op52pyjTlAF+nnpkXxt0i4='
   }
 }
