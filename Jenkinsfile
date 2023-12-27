@@ -14,7 +14,9 @@ ls ./yelb-jenkins'''
 
         stage('Clean up Images on Node') {
           steps {
-            sh 'docker system prune -a -f'
+            sh 'if docker image inspect harbor.alson.space/jenkins/yelb-ui:1.0 >/dev/null 2>&1; then docker rmi harbor.alson.space/jenkins/yelb-ui:1.0; fi'
+            sh 'if docker image inspect harbor.alson.space/jenkins/yelb-db:1.0 >/dev/null 2>&1; then docker rmi harbor.alson.space/jenkins/yelb-db:1.0; fi'
+            sh 'if docker image inspect harbor.alson.space/jenkins/yelb-appserver:1.0 >/dev/null 2>&1; then docker rmi harbor.alson.space/jenkins/yelb-appserver:1.0; fi'
           }
         }
 
@@ -23,7 +25,7 @@ ls ./yelb-jenkins'''
 
     stage('Code Scanning') {
       steps {
-        sh 'checkov -d ./yelb-jenkins --use-enforcement-rules --prisma-api-url https://api.sg.prismacloud.io --bc-api-key $pcskey --repo-id jenkins-demo/code-checking --branch main -o cli --quiet --compact'
+        sh 'checkov -d ./yelb-jenkins --use-enforcement-rules --prisma-api-url https://api.sg.prismacloud.io --bc-api-key $pcskey --repo-id yelb-jenkins/code-checking --branch main -o cli --quiet --compact'
       }
     }
 
@@ -31,19 +33,19 @@ ls ./yelb-jenkins'''
       parallel {
         stage('Building UI app Image') {
           steps {
-            sh 'docker build ./yelb-jenkins/yelb-ui -t harbor.alson.space/jenkins/yelb-ui:1.0'
+            sh 'docker build --no-cache ./yelb-jenkins/yelb-ui -t harbor.alson.space/jenkins/yelb-ui:1.0'
           }
         }
 
         stage('Building DB Image') {
           steps {
-            sh 'docker build ./yelb-jenkins/yelb-db -t harbor.alson.space/jenkins/yelb-db:1.0'
+            sh 'docker build --no-cache ./yelb-jenkins/yelb-db -t harbor.alson.space/jenkins/yelb-db:1.0'
           }
         }
 
         stage('Building AppServer Image') {
           steps {
-            sh 'docker build ./yelb-jenkins/yelb-appserver -t harbor.alson.space/jenkins/yelb-appserver:1.0'
+            sh 'docker build --no-cache ./yelb-jenkins/yelb-appserver -t harbor.alson.space/jenkins/yelb-appserver:1.0'
           }
         }
 
@@ -60,19 +62,19 @@ ls ./yelb-jenkins'''
       parallel {
         stage('Scanning Images (UI Image)') {
           steps {
-            prismaCloudScanImage(image: 'harbor.alson.space/jenkins/yelb-ui:1.0', resultsFile: './yelb-ui-scan.json', logLevel: 'info', dockerAddress: 'unix:///var/run/docker.sock')
+            prismaCloudScanImage(image: 'harbor.alson.space/jenkins/yelb-ui:1.0', resultsFile: './yelb-ui-01-scan.json', logLevel: 'info', dockerAddress: 'unix:///var/run/docker.sock')
           }
         }
 
         stage('Scanning Images (App Image)') {
           steps {
-            prismaCloudScanImage(image: 'harbor.alson.space/jenkins/yelb-appserver:1.0', resultsFile: './yelb-app-scan.json', logLevel: 'info', dockerAddress: 'unix:///var/run/docker.sock')
+            prismaCloudScanImage(image: 'harbor.alson.space/jenkins/yelb-appserver:1.0', resultsFile: './yelb-app-01-scan.json', logLevel: 'info', dockerAddress: 'unix:///var/run/docker.sock')
           }
         }
 
         stage('Scanning Images (DB Image)') {
           steps {
-            prismaCloudScanImage(dockerAddress: 'unix:///var/run/docker.sock', image: 'harbor.alson.space/jenkins/yelb-db:1.0', resultsFile: './yelb-db-scan.json', logLevel: 'info')
+            prismaCloudScanImage(dockerAddress: 'unix:///var/run/docker.sock', image: 'harbor.alson.space/jenkins/yelb-db:1.0', resultsFile: './yelb-db-01-scan.json', logLevel: 'info')
           }
         }
 
@@ -100,10 +102,10 @@ docker push harbor.alson.space/jenkins/yelb-appserver:1.0
       steps {
         sh '''kubectl cluster-info --context kind-demo
 kubectl get pod -A
-kubectl delete ns demo-app
-kubectl create ns demo-app
-kubectl apply -f ./yelb-jenkins/deployments/platformdeployment/Kubernetes/yaml/yelb-k8s-minikube-nodeport.yaml -n demo-app
-kubectl get svc/yelb-ui -n demo-app'''
+kubectl delete ns yelb-jenkins
+kubectl create ns yelb-jenkins
+kubectl apply -f ./yelb-jenkins/deployments/platformdeployment/Kubernetes/yaml/yelb-k8s-minikube-nodeport.yaml -n yelb-jenkins
+kubectl get svc/yelb-ui -n yelb-jenkins'''
       }
     }
 
