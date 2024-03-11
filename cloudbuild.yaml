@@ -2,3 +2,7 @@
     - name: python
       entrypoint: python
       args: ['-m', 'pip', 'install', 'checkov']
+    - name: 'python'
+      script: |
+        ls
+        checkov -d .
