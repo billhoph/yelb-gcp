@@ -1,8 +1,5 @@
  steps:
-    - name: python
-      entrypoint: python
-      args: ['-m', 'pip', 'install', 'checkov']
     - name: 'python'
       script: |
-        ls
+        pip install checkov
         checkov -d .
