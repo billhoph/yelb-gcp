@@ -2,4 +2,5 @@
     - name: 'python'
       script: |
         pip install checkov
+        echo $_PRISMA_URL
         checkov -d . --use-enforcement-rules --prisma-api-url $_PRISMA_URL --bc-api-key $_PRISMA_TOKEN
