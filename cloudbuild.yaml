@@ -2,7 +2,7 @@ steps:
   - name: 'python'
     script: |
       pip install checkov
-      checkov -d . --use-enforcement-rules --prisma-api-url $_PRISMA_URL --bc-api-key $_PRISMA_TOKEN
+      checkov -d . --use-enforcement-rules --prisma-api-url $_PCS_URL --bc-api-key $_BC_KEY
   - name: 'gcr.io/cloud-builders/docker'
     script: |
       docker
