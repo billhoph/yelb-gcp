@@ -1,14 +1,13 @@
 steps:
-  - name: 'python'
-    script: |
-      echo $_PCS_URL
-      echo $_BC_KEY
+  - id: 'checkov stage'
+    name: 'bridgecrew/checkov:latest'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        checkov -d . --use-enforcement-rules --prisma-api-url $_PCS_URL --bc-api-key $_BC_KEY --repo-id cloudbuild/yelb-gcp --quiet
     automapSubstitutions: true
-  - name: 'python'
-    script: |
-      pip install checkov
-      checkov -d . --use-enforcement-rules --prisma-api-url $_PCS_URL --bc-api-key $_BC_KEY --repo-id cloudbuild/yelb-gcp
-    automapSubstitutions: true
-  - name: 'gcr.io/cloud-builders/docker'
+  - id: 'image scan'
+    name: 'gcr.io/cloud-builders/docker'
     script: |
       docker
