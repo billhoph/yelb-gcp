@@ -34,7 +34,7 @@ steps:
       chmod +x ./twistcli
       ./twistcli images scan --details -address $_CONSOLE_URL -u $_PCS_USER -p ${_HARBOR_URL}/gcp/yelb-db:1.0
     automapSubstitutions: true
-   - id: 'image scan for app tier'
+  - id: 'image scan for app tier'
     name: 'gcr.io/cloud-builders/docker'
     script: |
       docker pull ${_HARBOR_URL}/gcp/yelb-appserver:1.0
