@@ -1,5 +1,5 @@
 steps:
-  - id: 'checkov stage'
+  - id: 'source code scanning'
     name: 'bridgecrew/checkov:latest'
     entrypoint: 'bash'
     args:
@@ -7,11 +7,38 @@ steps:
       - |
         checkov -d . --use-enforcement-rules --prisma-api-url $_PCS_URL --bc-api-key $_BC_KEY --repo-id cloudbuild/yelb-gcp --quiet
     automapSubstitutions: true
-  - id: 'image scan'
+  - id: 'image building & pushing to registry'
     name: 'gcr.io/cloud-builders/docker'
     script: |
-      docker pull nginx
+      docker build --no-cache ./yelb-ui -t ${_HARBOR_URL}/gcp/yelb-ui:1.0
+      docker build --no-cache ./yelb-db -t ${_HARBOR_URL}/gcp/yelb-db:1.0
+      docker build --no-cache ./yelb-appserver -t ${_HARBOR_URL}/gcp/yelb-appserver:1.0
+      docker login $_HARBOR_URL -u admin -p Harbor12345
+      docker push ${_HARBOR_URL}/gcp/yelb-ui:1.0
+      docker push ${_HARBOR_URL}/gcp/yelb-db:1.0
+      docker push ${_HARBOR_URL}/gcp/yelb-appserver:1.0
+    automapSubstitutions: true
+  - id: 'image scan for UI tier'
+    name: 'gcr.io/cloud-builders/docker'
+    script: |
+      docker pull ${_HARBOR_URL}/gcp/yelb-ui:1.0
       curl -k -u $_PCS_USER:$_PCS_PASS --output ./twistcli $_CONSOLE_URL/api/v1/util/twistcli
       chmod +x ./twistcli
-      ./twistcli images scan --details -address $_CONSOLE_URL -u $_PCS_USER -p $_PCS_PASS nginx
+      ./twistcli images scan --details -address $_CONSOLE_URL -u $_PCS_USER -p ${_HARBOR_URL}/gcp/yelb-ui:1.0
     automapSubstitutions: true
+  - id: 'image scan for DB tier'
+    name: 'gcr.io/cloud-builders/docker'
+    script: |
+      docker pull ${_HARBOR_URL}/gcp/yelb-db:1.0
+      curl -k -u $_PCS_USER:$_PCS_PASS --output ./twistcli $_CONSOLE_URL/api/v1/util/twistcli
+      chmod +x ./twistcli
+      ./twistcli images scan --details -address $_CONSOLE_URL -u $_PCS_USER -p ${_HARBOR_URL}/gcp/yelb-db:1.0
+    automapSubstitutions: true
+   - id: 'image scan for app tier'
+    name: 'gcr.io/cloud-builders/docker'
+    script: |
+      docker pull ${_HARBOR_URL}/gcp/yelb-appserver:1.0
+      curl -k -u $_PCS_USER:$_PCS_PASS --output ./twistcli $_CONSOLE_URL/api/v1/util/twistcli
+      chmod +x ./twistcli
+      ./twistcli images scan --details -address $_CONSOLE_URL -u $_PCS_USER -p ${_HARBOR_URL}/gcp/yelb-appserver:1.0
+    automapSubstitutions: true 
