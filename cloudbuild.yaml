@@ -10,4 +10,7 @@ steps:
   - id: 'image scan'
     name: 'gcr.io/cloud-builders/docker'
     script: |
-      docker
+      docker pull nginx
+      curl -k -u $_PCS_USER:$_PCS_PASS --output ./twistcli $_CONSOLE_URL/api/v1/util/twistcli
+      chmod +x ./twistcli
+      ./twistcli images scan --details -address $_CONSOLE_URL -u $_PCS_USER -p $_PCS_PASS nginx
