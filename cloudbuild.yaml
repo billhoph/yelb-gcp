@@ -5,7 +5,8 @@ steps:
     args:
       - '-c'
       - |
-        checkov -d . --use-enforcement-rules --prisma-api-url $_PCS_URL --bc-api-key $_BC_KEY --repo-id cloudbuild/yelb-gcp --quiet
+        checkov -d .
+        # checkov -d . --use-enforcement-rules --prisma-api-url $_PCS_URL --bc-api-key $_BC_KEY --repo-id cloudbuild/yelb-gcp --quiet
     automapSubstitutions: true
   - id: 'image scan'
     name: 'gcr.io/cloud-builders/docker'
