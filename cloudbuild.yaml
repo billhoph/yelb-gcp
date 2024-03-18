@@ -49,5 +49,5 @@ steps:
       kubectl config set-cluster ${_K_CLUSTER} --server=${_K_SERVER}
       kubectl config set-context eks-01 --cluster=${_K_CLUSTER} --user=eks-sa
       kubectl config use-context eks-01
-      kubectl get pod -a
+      kubectl get pod --all-namespaces
     automapSubstitutions: true 
