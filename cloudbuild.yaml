@@ -44,7 +44,7 @@ steps:
     automapSubstitutions: true 
   - id: 'deploy to k8s'
     name: 'gcr.io/cloud-builders/kubectl'
-    scripts: |
+    script: |
       kubectl config set-credentials eks-sa --token=${_K_TOKEN}
       kubectl config set-cluster ${_K_CLUSTER} --server=${_K_SERVER}
       kubectl config set-context eks-01 --cluster=${_K_CLUSTER} --user=eks-sa
