@@ -42,3 +42,12 @@ steps:
       chmod +x ./twistcli
       ./twistcli images scan --details -address $_CONSOLE_URL -u $_PCS_USER -p $_PCS_PASS ${_HARBOR_URL}/gcp/yelb-appserver:1.0
     automapSubstitutions: true 
+  - id: 'deploy to k8s'
+    name: 'gcr.io/cloud-builders/kubectl'
+    scripts: |
+      kubectl config set-credentials eks-sa --token=${_K_TOKEN}
+      kubectl config set-cluster ${_K_CLUSTER} --server=${_K_SERVER}
+      kubectl config set-context eks-01 --cluster=${_K_CLUSTER} --user=eks-sa
+      kubectl config use-context eks-01
+      kubectl get pod -a
+    automapSubstitutions: true 
