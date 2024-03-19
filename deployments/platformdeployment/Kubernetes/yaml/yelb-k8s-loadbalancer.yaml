@@ -82,7 +82,7 @@ spec:
         image:  harbor.alson.space/gcp/yelb-ui:1.0
         ports:
         - containerPort: 80
-        imagePullPolicy: always
+        imagePullPolicy: Always
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -105,7 +105,7 @@ spec:
         image: redis:4.0.2
         ports:
         - containerPort: 6379
-        imagePullPolicy: always
+        imagePullPolicy: Always
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -128,7 +128,7 @@ spec:
         image:  harbor.alson.space/gcp/yelb-db:1.0
         ports:
         - containerPort: 5432
-        imagePullPolicy: always
+        imagePullPolicy: Always
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -151,7 +151,7 @@ spec:
         image:  harbor.alson.space/gcp/yelb-appserver:1.0
         ports:
         - containerPort: 4567
-        imagePullPolicy: always
+        imagePullPolicy: Always
 
 
 
