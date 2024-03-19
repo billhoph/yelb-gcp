@@ -42,7 +42,7 @@ steps:
       chmod +x ./twistcli
       ./twistcli images scan --details -address $_CONSOLE_URL -u $_PCS_USER -p $_PCS_PASS ${_HARBOR_URL}/gcp/yelb-appserver:1.0
     automapSubstitutions: true 
-  - id: 'deploy to k8s'
+  - id: 'Deploy to EKS'
     name: 'gcr.io/cloud-builders/kubectl'
     script: |
       kubectl config set-credentials eks-sa --token=${_K_TOKEN}
