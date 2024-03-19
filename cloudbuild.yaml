@@ -45,12 +45,16 @@ steps:
   - id: 'deploy to k8s'
     name: 'gcr.io/cloud-builders/kubectl'
     script: |
-      echo ${_K_CA} > ca.crt
-      cat ca.crt | base64 -d
-      kubectl config set-credentials eks-sa --token=${_K_TOKEN} --certificate-authority=ca.crt
+      kubectl config set-credentials eks-sa --token=${_K_TOKEN}
       kubectl config set-cluster ${_K_CLUSTER} --server=${_K_SERVER}
       kubectl config set-context eks-01 --cluster=${_K_CLUSTER} --user=eks-sa
       kubectl config use-context eks-01
+      echo =====
+      echo clusters.${_K_CLUSTER}.certificate-authority-data
+      echo ${_K_CA}
+      echo =====
+      kubectl config set clusters.${_K_CLUSTER}.certificate-authority-data ${_K_CA}
+      kubectl config view --flatten --minify
       kubectl delete ns gcp
       kubectl create ns gcp
       kubectl apply -f ./deployments/platformdeployment/Kubernetes/yaml/yelb-k8s-loadbalancer.yaml -n gcp
